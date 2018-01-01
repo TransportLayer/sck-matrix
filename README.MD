@@ -32,6 +32,9 @@ synced together. The first output of each decade counter is column 0, the
 second is column 1, and so on. The output is over UART at 230400 baud.
 
 ## How to decode the output
+The output is encoded by
+`uint8_t output = ((matrixNumber * 50) + (row * 10) + column) | !keyDown << 7;`,
+so a possible way to decode it is:
  - `uint8_t keyDown = output / 0b1<<7;`
  - `uint8_t matrixNumber = (output % 0b1<<7) / 50;`
  - `uint8_t row = ((output % 0b1<<7) % 50) / 10;`
