@@ -28,7 +28,7 @@
 #define DEBOUNCE_MIN 2500	// Minimum time in microseconds before confirming pin state
 #define DEBOUNCE_MODE 0		// 0: Accurate / 1: Fast
 
-const uint8_t matrixPins[5][2] = {
+const uint8_t matrixRows[5][2] = {
 	{4, 13},	// Each array is one row
 	{5, 12},	// Each number is the pin for that matrix
 	{6, 11},
@@ -95,9 +95,9 @@ void setupPins(void) {
 	digitalWrite(MATRIX_CLOCK, LOW);	// (I think this might be done automatically though)
 	pinMode(MATRIX_RESET, OUTPUT);
 	pinMode(MATRIX_CLOCK, OUTPUT);
-	for (uint8_t row = 0; row < sizeof(matrixPins) / sizeof(matrixPins[0]); ++row) {
-		for (uint8_t matrixNumber = 0; matrixNumber < sizeof(matrixPins[row]) / sizeof(uint8_t); ++matrixNumber) {
-			pinMode(matrixPins[row][matrixNumber], INPUT);
+	for (uint8_t row = 0; row < sizeof(matrixRows) / sizeof(matrixRows[0]); ++row) {
+		for (uint8_t matrixNumber = 0; matrixNumber < sizeof(matrixRows[row]) / sizeof(uint8_t); ++matrixNumber) {
+			pinMode(matrixRows[row][matrixNumber], INPUT);
 		}
 	}
 }
@@ -121,8 +121,8 @@ void setup(void) {
 }
 
 void loop(void) {
-	for (uint8_t row = 0; row < sizeof(matrixPins) / sizeof(matrixPins[0]); ++row) {
-		for (uint8_t matrixNumber = 0; matrixNumber < sizeof(matrixPins[row]) / sizeof(uint8_t); ++matrixNumber) {
+	for (uint8_t row = 0; row < sizeof(matrixRows) / sizeof(matrixRows[0]); ++row) {
+		for (uint8_t matrixNumber = 0; matrixNumber < sizeof(matrixRows[row]) / sizeof(uint8_t); ++matrixNumber) {
 			// 0b00000000	Key Down (0)
 			// 0b10000000	Key Up   (128)
 			// 00-49	Matrix 0
@@ -131,7 +131,7 @@ void loop(void) {
 			// 50,60,70...	Rows 0, 1, 2... in Matrix 1
 			// 0-9		Columns 0-9
 			uint8_t keyCode = (matrixNumber * 50) + (row * 10) + column;		// Generate the keycode based on the information above
-			bool pinState = digitalRead(matrixPins[row][matrixNumber]);	// Get the current state of the pin
+			bool pinState = digitalRead(matrixRows[row][matrixNumber]);	// Get the current state of the pin
 
 			switch (DEBOUNCE_MODE) {
 				case 0:		// Accurate (double-checks before sending out the state)
