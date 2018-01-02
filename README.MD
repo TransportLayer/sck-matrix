@@ -35,10 +35,10 @@ second is column 1, and so on. The output is over UART at 230400 baud.
 The output is encoded by
 `uint8_t output = ((matrixNumber * 50) + (row * 10) + column) | !keyDown << 7;`,
 so a possible way to decode it is:
- - `uint8_t keyDown = output / 0b1<<7;`
- - `uint8_t matrixNumber = (output % 0b1<<7) / 50;`
- - `uint8_t row = ((output % 0b1<<7) % 50) / 10;`
- - `uint8_t column = (output % 0b1<<7) % 10;`
+ - `uint8_t keyDown = output >>> 7;`
+ - `uint8_t matrixNumber = (output & ~(1<<7)) / 50;`
+ - `uint8_t row = ((output & ~(1<<7)) % 50) / 10;`
+ - `uint8_t column = (output & ~(1<<7)) % 10;`
 
 ## Debounce modes
 ### Mode 0
