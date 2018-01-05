@@ -1,7 +1,8 @@
 # SCKeyboard: Key matrix
-This firmware drives, reads, and debounces 2 10x5 key matrices. It uses 12 I/O
-pins total (5 inputs per matrix and 2 outputs for both decade counters), with
-configurable key debouncing.
+This firmware drives, reads, and debounces 2 10x5 key matrices. To save I/O
+pins, it uses 2 decade counters as column drivers, taking only 2 pins for all
+columns instead of 20. It uses 12 I/O pins total (5 inputs per matrix and 2
+outputs for both decade counters), with configurable key debouncing.
 
 ## What this firmware does
  - Drives 2 key matrices
@@ -20,6 +21,7 @@ configurable key debouncing.
 ## Hardware required
  - ATmega328 or compatbile AVR microcontroller (16MHz or higher recommended)
  - 2x decade counter (such as CB4017B)
+ - 12x pull-down resistors (10K ohms recommended)
 
 ## How to use this firmware
 Compile this firmware with the Arduino libraries. Flash it, and wire your rows
