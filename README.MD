@@ -25,11 +25,13 @@ configurable key debouncing.
 Compile this firmware with the Arduino libraries. Flash it, and wire your rows
 of Matrix 0 to Arduino pins 4, 5, 6, 7, and 8. Wire your rows of Matrix 1 to
 Arduino pins 13, 12, 11, 10, and 9. Add pull-down resistors (10K ohms is a
-reasonable value) to every row. Wire together the reset pins of both decade
-counters, and wire together the clock pins of both decade counters. It doesn't
-matter which decade counter drives the columns of which matrix, as they're
-synced together. The first output of each decade counter is column 0, the
-second is column 1, and so on. The output is over UART at 230400 baud.
+reasonable value) to every row. Wire the reset pins of both decade counters to
+Arduino pin 14 (may be called A0), and wire the clock pins of both decade
+counters to Arduino pin 15 (may be called A1). Add pull-down resistors to both
+of these outputs. It doesn't matter which decade counter drives the columns of
+which matrix, as they're synced together. The first output of each decade
+counter is column 0, the second is column 1, and so on. The output is over UART
+at 230400 baud.
 
 ## How to decode the output
 The output is encoded by
