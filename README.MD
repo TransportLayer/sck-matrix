@@ -31,7 +31,7 @@ reasonable value) to every row. Wire the reset pins of both decade counters to
 Arduino pin 14 (may be called A0), and wire the clock pins of both decade
 counters to Arduino pin 15 (may be called A1). Add pull-down resistors to both
 of these outputs _(I didn't think they would be necessary, but I had occasional
-issues without them. If you have an explanation, let me know!)_ It doesn't
+issues without them. If you have an explanation, let me know!)_. It doesn't
 matter which decade counter drives the columns of which matrix, as they're
 synced together. The first output of each decade counter is column 0, the
 second is column 1, and so on. The output is over UART at 115200 baud.
