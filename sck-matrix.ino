@@ -117,7 +117,7 @@ void incrementColumns(void) {
 void setup(void) {
 	setupPins();
 	resetColumns();
-	Serial.begin(230400);
+	Serial.begin(115200);
 }
 
 void loop(void) {
